@@ -1,0 +1,7 @@
+lib/node_modules
+css/
+dist/
+lib/.sass-cache
+javascripts/fbGetter.js
+javascripts/dbGetter.js
+.DS_Store
