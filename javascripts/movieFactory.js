@@ -3,16 +3,47 @@
 let $ = require('jquery');
 let dbGet = require("./dbGetter")();
 
+let movieArr = [];
+
 module.exports.getMovies = (search) => {
   return new Promise( ( resolve, reject) => {
     $.ajax({
       url: `${dbGet.baseURL}${dbGet.key}&query=${search}`
     }).done( (movieData) => {
-      console.log("movie data", movieData);
+      for(let i = 0; i < 10; i++) {
+        movieArr.push(movieData.results[i].id);
+      }
+      console.log("Test", movieArr);
+      let promiseArray = makeActorPromises();
+      Promise.all(promiseArray)
+      .then((credits) => {
+        console.log("credits", credits);
+      });//call a new function that takes the arguments "movieData" and "credits", and have that function combine them
       resolve(movieData);
     });
   });
 };
+
+function makeActorPromises() {
+  let promiseArray = [];
+  for (let i = 0; i < movieArr.length; i++) {
+    let actorURL = `https://api.themoviedb.org/3/movie/${movieArr[i]}/credits?api_key=${dbGet.key}`;
+    promiseArray.push(getActors(actorURL));
+  }
+  return promiseArray;
+}
+
+function getActors(actorURL) {
+  //fetch actors from API, but wrap it in a promise
+  //This returns a promise
+  return new Promise((resolve, reject) => {
+    $.ajax({
+        url: actorURL
+      }).done( (actorData) => {
+        resolve(actorData);
+    });
+  });
+}
 
 // function addIds(songData) {
 //   var idArr = Object.keys(songData);
