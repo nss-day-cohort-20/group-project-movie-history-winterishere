@@ -7,7 +7,6 @@ let db = require('./movieFactory');
 
 module.exports.newMovieSearch = () => {
   $("#new-movies").click(function() {
-  // let searchValue = document.getElementById("#search-bar").value;
   let searchValue = $("#search-bar").val();
     db.getMovies(searchValue);
     // let songForm = templates.buildSongForm();
