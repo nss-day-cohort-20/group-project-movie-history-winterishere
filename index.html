@@ -13,24 +13,29 @@
 	</div>
 	<div class="navbar-left">
 		<input type="text" id="search-bar" placeholder="search" value="">
-		<a href="#" id="new-movies">Search New Movies</a>
-		<a href="#" id="my-movies">Search My Movies</a>
+		<button id="search-movies"><a href="#">Search</a></button>
 	</div>
 	<div class="navbar-right">
-		<a href="#" id="log-on">Log-in/ Register</a>
-		<a href="#" id="log-out">Log-out</a>
+		<button id="log-on"><a href="#">Log-in/ Register</a></button>
+		<button id="log-out"><a href="#">Log-out</a></button>
 	</div>
 </nav>
 
 	<div id="title-container">
 		<h1>Movie History</h1>
 		<div id="list-container">
-			<div id="unwatched">
+			<button id="untracked">
+				Show Untracked
+			</button>
+			<button id="unwatched">
 				Show Unwatched
-			</div>
-			<div id="watched">
+			</button>
+			<button id="watched">
 				Show Watched
-			</div>
+			</button>
+			<button id="favorites">
+				Favorites
+			</button>
 		</div>
 	</div><br><br>
 
@@ -38,7 +43,7 @@
 	  <div class="row">
       <div class="col-md-4">
 				<div class="card" style="width: 20rem;">
-				  <img class="card-img-top" src="#" alt="Card image cap">
+				  <img class="card-img-top" src="images/noposter.jpg" alt="Card image cap">
 				  <div class="card-block">
 				    <h4 class="card-title">Card title</h4>
 				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
