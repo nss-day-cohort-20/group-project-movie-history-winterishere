@@ -5,6 +5,8 @@ let dbGet = require("./dbGetter")();
 let $container = $('.container');
 let templates = require('./templateBuilder');
 let formTemplate = require('../templates/card.hbs');
+let fbURL = "test-9f12e.firebaseapp.com";
+let firebase = require('./fbConfig');
 
 let movieArr = [];
 
@@ -66,3 +68,19 @@ function buildCastArray(movieData, castArray) {
     $container.append(completedCard);
   });
 }
+
+
+module.exports.addMovie = (movieObj) => {
+  return new Promise( (resolve, reject) => {
+    let currentUser = firebase.auth().currentUser.uid;
+    movieObj.uid = currentUser;
+    $.ajax({
+      url: `${fbURL}/movies.json`,
+      type: "POST",
+      data: JSON.stringify(movieObj),
+      dataType: "json"
+    }).done( (movieId) => {
+      resolve(movieId);
+    });
+  });
+};

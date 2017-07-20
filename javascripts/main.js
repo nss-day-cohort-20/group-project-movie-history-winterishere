@@ -6,6 +6,7 @@ let userFactory = require("./userFactory");
 
 //Allows all elements with event listeners to be activated on load
 controller.newMovieSearch();
+controller.addToWatchList();
 
 //When the user clicks the log in link, this calls the function to log them in with firebase
 //It also loads the user's movies to the DOM
@@ -14,7 +15,6 @@ $("#log-on").click( function() {
 	.then( (result) => {
 		let user = result.user.uid;
 		console.log("user", user);
-		controller.loadMoviesToDom();
 	});
 });
 

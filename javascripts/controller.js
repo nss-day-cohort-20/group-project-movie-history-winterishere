@@ -15,15 +15,13 @@ module.exports.newMovieSearch = () => {
   });
 };
 
-// function buildSongObj() {
-//  let songObj = {
-//     title: $("#form--title").val(),
-//     album: $("#form--album").val(),
-//     artist: $("#form--artist").val(),
-//     year: $("#form--year").val()
-//   };
-//   return songObj;
-// }
+module.exports.addToWatchList = () => {
+	$(".card-link").click(function() {
+		//post to firebase
+		console.log("addToWatchList");
+		// db.addMovie(movieObj);
+	});
+};
 
 // module.exports.loadSongsToDom = () => {
 //   db.getSongs()
