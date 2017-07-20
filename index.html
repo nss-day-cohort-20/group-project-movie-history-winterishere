@@ -7,16 +7,20 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-
-	<div id="nav-container">
+<nav id="nav-container">
+	<div class="navbar-header">
+		<img src="images/winterlogo.jpg" alt="logo">
+	</div>
+	<div class="navbar-left">
+		<input type="text" id="search-bar" placeholder="search" value="">
 		<a href="#" id="new-movies">Search New Movies</a>
 		<a href="#" id="my-movies">Search My Movies</a>
-		<input type="text" id="search-bar" placeholder="search" value="">
-		<div>
-			<a href="#" id="log-on">Log-in/ Register/</a>
-			<a href="#" id="log-out">Log-out</a>
-		</div>
 	</div>
+	<div class="navbar-right">
+		<a href="#" id="log-on">Log-in/ Register</a>
+		<a href="#" id="log-out">Log-out</a>
+	</div>
+</nav>
 
 	<div id="title-container">
 		<h1>Movie History</h1>
@@ -51,7 +55,11 @@
 			</div>
 	  </div>
 	</div>
-
+<footer class="footer">
+  <div class="container-fluid">
+    <p class="text-muted">&copy 2017</p>
+  </div>  
+</footer>
 
 	<script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
