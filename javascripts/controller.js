@@ -6,11 +6,12 @@ let db = require('./movieFactory');
 // let $container = $('.uiContainer--wrapper');
 
 module.exports.newMovieSearch = () => {
-  $("#new-movies").click(function() {
-  let searchValue = $("#search-bar").val();
-    db.getMovies(searchValue);
-    // let songForm = templates.buildSongForm();
-    // $container.html(songForm);
+  $(document).keypress(function(e) {
+    var key = e.which;
+    if(key == 13) {
+      let searchValue = $("#search-bar").val();
+        db.getMovies(searchValue);
+    }
   });
 };
 
