@@ -1,27 +1,62 @@
 html, body
 	width: 100%
+	background-color: #222
+	color: #c1c1c1 
 
 
 #nav-container
-	border: 1px solid black
-	width: 90%
-	margin: 0 auto
-	padding: 15px
+	border: 2px solid #191919
+	max-width: 100%
 	display: flex
 	align-items: center
 	justify-content: space-around
+	margin-bottom: 20px
+
+.navbar-header
+	margin-left: 0
+
+a
+	color: #f6f6f6
+
+a:hover
+	text-decoration: none
+	color: #014c8c
+
+#search-bar
+	width: 500px
+	box-shadow: 1px 1px 3px 4px #191919
+	margin-right: 5px
+
+#new-movies, #my-movies
+	display: inline
+	border: 2px solid #191919
+	border-radius: 4px
+	margin: 0 5px
+	padding: 10px
+	box-shadow: 1px 1px 1px 1px #191919
+
+#log-on, #log-out
+	border-radius: 4px
+	padding: 10px
+	border: 2px solid #191919
+	display: block
+	margin-bottom: 5px
+	box-shadow: 1px 1px 1px 1px #191919
 
 #title-container
-	width: 90%
+	max-width: 90%
 	margin: 0 auto
-
-#unwatched, #watched
-	border: 1px solid black
-	display: inline
-	padding: 5px 65px
 
 #title-container h1
 	padding-bottom: 10px
+
+#unwatched, #watched
+	border: 2px solid #191919
+	border-radius: 4px
+	display: inline
+	padding: 5px 65px
+	box-shadow: 1px 1px 1px 1px #191919
+	margin-right: 5px
 
 .selected
 	background-color: lightgray
@@ -29,3 +64,18 @@ html, body
 .container-fluid
 	width: 90%
 	margin: 0 auto
+
+h1
+	color: #f6f6f6
+	text-shadow: -2px 0 #191919, 0 2px #191919, 2px 0 #191919, 0 -2px #191919
+
+.card
+	background-color: #191919
+	box-shadow: 1px 1px 1px 1px #191919
+
+.footer 
+	position: fixed
+	padding-top: 20px
+	border: 2px solid #191919
+	bottom: 0
+	width: 100%
