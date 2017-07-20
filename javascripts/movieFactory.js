@@ -13,12 +13,13 @@ module.exports.getMovies = (search) => {
       for(let i = 0; i < 10; i++) {
         movieArr.push(movieData.results[i].id);
       }
-      console.log("Test", movieArr);
+      console.log("movie data", movieData);
       let promiseArray = makeActorPromises();
       Promise.all(promiseArray)
       .then((credits) => {
-        console.log("credits", credits);
-      });//call a new function that takes the arguments "movieData" and "credits", and have that function combine them
+        getCast(movieData, credits);
+      });
+      //call a new function that takes the arguments "movieData" and "credits", and have that function combine them
       resolve(movieData);
     });
   });
@@ -45,6 +46,31 @@ function getActors(actorURL) {
   });
 }
 
+function getCast(movieData, credits) {
+  let castArray = [];
+  for (let i = 0; i < credits.length; i++) {
+    let cast = credits[i].cast.splice(0, 3);
+    castArray.push(cast);
+  }
+  buildCastArray(movieData, castArray);
+}
+
+function buildCastArray(movieData, castArray) {
+  let movieResults = movieData.results;
+  // for (let i = 0; i < movieResults.length; i++) {
+  //   console.log("movie", movieData.results[i]);
+  //   for (let j = 0; j < castArray.length; j++) {
+  //     console.log("cast array", castArray);
+  //   }
+  castArray.forEach(function(items) {
+    movieResults.forEach(function(results) {
+      console.log("movie", results);
+        items.forEach(function(actor) {
+          console.log("actor", actor.name);
+        });
+    });
+  });
+}
 // function addIds(songData) {
 //   var idArr = Object.keys(songData);
 //   console.log("idArr", idArr);
