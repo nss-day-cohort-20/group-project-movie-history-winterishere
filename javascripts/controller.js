@@ -2,7 +2,7 @@
 
 let $ = require('jquery');
 let db = require('./movieFactory');
-// let templates = require('./template-builder');
+let templates = require('./templateBuilder.js');
 // let $container = $('.uiContainer--wrapper');
 
 module.exports.newMovieSearch = () => {
@@ -15,13 +15,28 @@ module.exports.newMovieSearch = () => {
   });
 };
 
+
+// USED in main.js - activated on load
 module.exports.addToWatchList = () => {
-	$(".card-link").click(function() {
-		//post to firebase
+	$(document).on("click", ".card-link", function() {
+    // push to fb
+    let addedWatched = $(this).data("movieArr");
+    console.log("added", addedWatched);
+    db.addMovie(db.movieArr)
+    .then( (movie) => {
+      movie.id = db.movieId;
+      let addMovie = templates.buildMovieCard();
 		console.log("addToWatchList");
-		// db.addMovie(movieObj);
-	});
+    });
+  });
 };
+
+// obj w/ rating 0 & movie id
+
+
+
+
+
 
 // module.exports.loadSongsToDom = () => {
 //   db.getSongs()
@@ -33,16 +48,16 @@ module.exports.addToWatchList = () => {
 // };
 
 
-//   $(document).on("click", ".edit-btn", function() {
-//     console.log("edit btn clicked");
-//     let songId = $(this).data("edit-id");
-//     db.getSong(songId)
-//     .then( (song) => {
-//       song.id = songId;
-//       let editForm = templates.buildSongForm(song);
-//       $container.html(editForm);
-//     });
-//   });
+  // $(document).on("click", ".edit-btn", function() {
+  //   console.log("edit btn clicked");
+  //   let songId = $(this).data("edit-id");
+  //   db.getSong(songId)
+  //   .then( (song) => {
+  //     song.id = songId;
+  //     let editForm = templates.buildSongForm(song);
+  //     $container.html(editForm);
+  //   });
+  // });
 
 //   $(document).on("click", ".save_edit_btn", function() {
 //     //save edited song;
