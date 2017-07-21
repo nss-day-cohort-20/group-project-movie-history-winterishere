@@ -4,11 +4,14 @@ let $ = require('jquery');
 let db = require('./movieFactory');
 let templates = require('./templateBuilder.js');
 // let $container = $('.uiContainer--wrapper');
+let $container = $('.container');
+
 
 module.exports.newMovieSearch = () => {
   $(document).keypress(function(e) {
     var key = e.which;
     if(key == 13) {
+      $container.html("");
       let searchValue = $("#search-bar").val();
         db.getMovies(searchValue);
     }
