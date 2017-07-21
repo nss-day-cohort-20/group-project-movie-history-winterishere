@@ -1,3 +1,5 @@
+// the template builder requires the card.hbs
+// exports buildMovieCard
 'use strict';
 
 let $ = require('jquery');
