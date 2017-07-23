@@ -1,6 +1,6 @@
 {{!-- the card.hbs makes the card with handlebars. this card..this MOD is required by templateBuilder.js --}}
-
-<div class="card" style="width: 20rem;">
+<div class="col-md-4">
+<div class="card" style="width: 14rem;">
 {{!-- if there is a poster then link the URL to the correct poster...if else then show the no poster img --}}
 	{{#if poster_path}}
     <img id="{{id}}-image" class="card-img-top" src="http://image.tmdb.org/t/p/w342/{{poster_path}}" alt="Card image cap">
@@ -21,4 +21,5 @@
   <div class="card-block">
     <a href="#" onclick="return false" class="card-link" data-add-watch="{{id}}">Add to Watchlist</a>
   </div>
+</div>
 </div>

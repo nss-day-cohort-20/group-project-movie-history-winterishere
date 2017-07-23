@@ -86,7 +86,8 @@ function buildCastArray(movieData, castArray) {
   movieResults.forEach(function(movie, index) {
     // cast array at each index matched the movie index
     movie.castList = castArray[index];
-    console.log("movie", movie);
+    movie.release_date = movie.release_date.substring(0,4);
+    // console.log("movie date", movie.release_date);
     // setting completedCard to fully built card
     let completedCard = templates.buildMovieCard(movie);
     // printing into the dom appended to the cards from handlebars
