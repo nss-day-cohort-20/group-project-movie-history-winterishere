@@ -17,11 +17,14 @@ module.exports.newMovieSearch = () => {
 
 
 // USED in main.js - activated on load
+// need db.movieArr to be array with links(it should be) and passed into function - seperate from click event?
 module.exports.addToWatchList = () => {
 	$(document).on("click", ".card-link", function() {
+    // console.log("this", this);
     // push to fb
-    let addedWatched = $(this).data("movieArr");
-    console.log("added", addedWatched);
+    let movieId = $(this).data("add-watch");
+    console.log("movieId", movieId);
+    console.log("movieArr", db.movieArr);
     db.addMovie(db.movieArr)
     .then( (movie) => {
       movie.id = db.movieId;

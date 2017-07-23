@@ -97,12 +97,14 @@ function buildCastArray(movieData, castArray) {
 
 // helper func returns a promise used in promise.all
 module.exports.addMovie = (movieData) => {
-  console.log("movieData", movieData);
+  // console.log("movieData", movieData);
   return new Promise( (resolve, reject) => {
     // setting var that sets the firebase auth to current user
     let currentUser = firebase.auth().currentUser.uid;
+    console.log(currentUser);
     // setting current user to each movie obj
     movieData.uid = currentUser;
+    console.log("movieData", movieData);
     // call that posts users movies to fb
     $.ajax({
       url: `${fbURL}/movies.json`,
