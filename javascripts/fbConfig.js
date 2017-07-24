@@ -1,5 +1,5 @@
 'use strict';
-// uses fb and getter --> api key 
+// uses fb and getter --> api key
 let firebase = require('firebase/app');
 let fbData = require("./fbGetter")();
 

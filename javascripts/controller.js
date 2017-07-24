@@ -2,34 +2,22 @@
 
 let $ = require('jquery');
 let db = require('./movieFactory');
-let templates = require('./templateBuilder.js');
-// let $container = $('.uiContainer--wrapper');
-let $container = $('.container');
+let firebase = require('./fbConfig');
 
+//called on click of "Add to Watchlist" from main.js, we now send firebase an object with the movie information we need not contained in the api - MB
 
-module.exports.newMovieSearch = () => {
-  $(document).keypress(function(e) {
-    var key = e.which;
-    if(key == 13) {
-      $container.html("");
-      let searchValue = $("#search-bar").val();
-        db.getMovies(searchValue);
-    }
-  });
-};
-
-
-// USED in main.js - activated on load
-module.exports.addToWatchList = () => {
-	$(document).on("click", ".card-link", function() {
-    // push to fb
-    let addedWatched = $(this).data("movieArr");
-    console.log("added", addedWatched);
-    db.addMovie(db.movieArr)
+module.exports.addToWatchList = (movieId) => {
+  let currentUser = firebase.auth().currentUser.uid;
+  console.log("movieId", movieId);
+  console.log("printmymessage", currentUser);
+    let newMovieObj = {
+      id: movieId,
+      user: currentUser,
+      watched: false
+    };
+    db.addMovie(newMovieObj)
+//resolve after posting to firebase, not sure what was going on here - MB
     .then( (movie) => {
-      movie.id = db.movieId;
-      let addMovie = templates.buildMovieCard();
 		console.log("addToWatchList");
     });
-  });
 };
