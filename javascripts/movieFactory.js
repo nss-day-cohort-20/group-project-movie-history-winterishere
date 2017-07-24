@@ -1,5 +1,5 @@
 'use strict';
-// 
+//
 let $ = require('jquery');
 let dbGet = require("./dbGetter")();
 let $container = $('.container');
@@ -12,19 +12,19 @@ let firebase = require('./fbConfig');
 let movieArr = [];
 
 // getMovies is getting exported & used in the controller
-// getMovies returnes a promise 
+// getMovies returnes a promise
 module.exports.getMovies = (search) => {
   return new Promise( ( resolve, reject) => {
     // makes a call to the database for movie data
     $.ajax({
-      url: `${dbGet.baseURL}${dbGet.key}&query=${search}`
+      url: `https://api.themoviedb.org/3/search/movie?api_key=${dbGet.key}&query=${search}"`
     }).done( (movieData) => {
       // looping through set of 10 in movieData and pushing to movieArr
       for(let i = 0; i < 10; i++) {
         movieArr.push(movieData.results[i].id);
       }
       console.log("movie id???", movieArr);
-      // sets var = to func makeActorPromises & runs promise.all 
+      // sets var = to func makeActorPromises & runs promise.all
       let promiseArray = makeActorPromises();
       Promise.all(promiseArray)
       // uses makeActorPromises func to get credit info from api
@@ -82,7 +82,7 @@ function getCast(movieData, credits) {
 function buildCastArray(movieData, castArray) {
   // setting movieResults to movieData
   let movieResults = movieData.results;
-  // for each movie 
+  // for each movie
   movieResults.forEach(function(movie, index) {
     // cast array at each index matched the movie index
     movie.castList = castArray[index];
