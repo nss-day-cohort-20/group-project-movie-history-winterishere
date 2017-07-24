@@ -3,6 +3,7 @@
 let $ = require('jquery');
 let db = require('./movieFactory');
 let templates = require('./templateBuilder.js');
+let firebase = require('./fbConfig');
 // let $container = $('.uiContainer--wrapper');
 
 module.exports.newMovieSearch = () => {
@@ -18,20 +19,21 @@ module.exports.newMovieSearch = () => {
 
 // USED in main.js - activated on load
 // need db.movieArr to be array with links(it should be) and passed into function - seperate from click event?
-module.exports.addToWatchList = () => {
-	$(document).on("click", ".card-link", function() {
-    // console.log("this", this);
-    // push to fb
-    let movieId = $(this).data("add-watch");
-    console.log("movieId", movieId);
-    console.log("movieArr", db.movieArr);
-    db.addMovie(db.movieArr)
+module.exports.addToWatchList = (movieId) => {
+  let currentUser = firebase.auth().currentUser.uid;
+  console.log("movieId", movieId);
+  console.log("printmymessage", currentUser);
+    let newMovieObj = {
+      id: movieId,
+      user: currentUser,
+      watched: false
+    };
+    db.addMovie(newMovieObj)
     .then( (movie) => {
       movie.id = db.movieId;
       let addMovie = templates.buildMovieCard();
 		console.log("addToWatchList");
     });
-  });
 };
 
 // obj w/ rating 0 & movie id

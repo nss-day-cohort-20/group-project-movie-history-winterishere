@@ -5,7 +5,7 @@ let dbGet = require("./dbGetter")();
 let $container = $('.container');
 let templates = require('./templateBuilder');
 let formTemplate = require('../templates/card.hbs');
-let fbURL = "test-9f12e.firebaseapp.com";
+let fbURL = "https://moviewatcher-movie-history.firebaseio.com";
 let firebase = require('./fbConfig');
 
 // empty arr that we are pushing movieData results into
@@ -82,34 +82,38 @@ function getCast(movieData, credits) {
 function buildCastArray(movieData, castArray) {
   // setting movieResults to movieData
   let movieResults = movieData.results;
-  // for each movie
+  // let allTheNewMovies = templates.makeMovieList(movieResults);
+  // $container.html(allTheNewMovies);
   movieResults.forEach(function(movie, index) {
     // cast array at each index matched the movie index
     movie.castList = castArray[index];
     movie.release_date = movie.release_date.substring(0,4);
-    // console.log("movie date", movie.release_date);
     // setting completedCard to fully built card
     let completedCard = templates.buildMovieCard(movie);
     // printing into the dom appended to the cards from handlebars
     $container.append(completedCard);
   });
+  console.log("movie results for real", movieResults);
+
+
+
 }
 
 // helper func returns a promise used in promise.all
-module.exports.addMovie = (movieData) => {
+module.exports.addMovie = (newMovieObj) => {
   // console.log("movieData", movieData);
   return new Promise( (resolve, reject) => {
     // setting var that sets the firebase auth to current user
-    let currentUser = firebase.auth().currentUser.uid;
-    console.log(currentUser);
+    // let currentUser = firebase.auth().currentUser.uid;
+    // console.log(currentUser);
     // setting current user to each movie obj
-    movieData.uid = currentUser;
-    console.log("movieData", movieData);
+    // movieData.uid = currentUser;
+    // console.log("movieData", movieData);
     // call that posts users movies to fb
     $.ajax({
       url: `${fbURL}/movies.json`,
       type: "POST",
-      data: JSON.stringify(movieData),
+      data: JSON.stringify(newMovieObj),
       dataType: "json"
     }).done( (movieId) => {
       resolve(movieId);
