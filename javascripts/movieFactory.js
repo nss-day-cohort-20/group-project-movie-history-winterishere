@@ -1,37 +1,35 @@
 'use strict';
-// 
+//
 let $ = require('jquery');
 let dbGet = require("./dbGetter")();
 let $container = $('.container');
 let templates = require('./templateBuilder');
-let formTemplate = require('../templates/card.hbs');
-let fbURL = "test-9f12e.firebaseapp.com";
-let firebase = require('./fbConfig');
+let fbURL = "https://moviewatcher-movie-history.firebaseio.com";
 
 // empty arr that we are pushing movieData results into
 let movieArr = [];
 
 // getMovies is getting exported & used in the controller
-// getMovies returnes a promise 
+// getMovies returnes a promise
 module.exports.getMovies = (search) => {
   return new Promise( ( resolve, reject) => {
     // makes a call to the database for movie data
     $.ajax({
-      url: `${dbGet.baseURL}${dbGet.key}&query=${search}`
+      url: `https://api.themoviedb.org/3/search/movie?api_key=${dbGet.key}&query=${search}"`
     }).done( (movieData) => {
       // looping through set of 10 in movieData and pushing to movieArr
       for(let i = 0; i < 10; i++) {
         movieArr.push(movieData.results[i].id);
       }
       console.log("movie id???", movieArr);
-      // sets var = to func makeActorPromises & runs promise.all 
+      // sets var = to func makeActorPromises & runs promise.all
       let promiseArray = makeActorPromises();
       Promise.all(promiseArray)
       // uses makeActorPromises func to get credit info from api
       .then((credits) => {
         getCast(movieData, credits);
       });
-      //call a new function that takes the arguments "movieDa// makes a call to the database for movie datata" and "credits", and have that function combine them
+      //call a new function that takes the arguments "moviedata" and "credits", and have that function combine them
       resolve(movieData);
     });
   });
@@ -54,7 +52,6 @@ function makeActorPromises() {
 // helper func returns a promise used in promise.all
 function getActors(actorURL) {
   //fetch actors from API, but wrap it in a promise
-  //This returns a promise
   return new Promise((resolve, reject) => {
     $.ajax({
         url: actorURL
@@ -82,40 +79,28 @@ function getCast(movieData, credits) {
 function buildCastArray(movieData, castArray) {
   // setting movieResults to movieData
   let movieResults = movieData.results;
-  // for each movie 
   movieResults.forEach(function(movie, index) {
     // cast array at each index matched the movie index
     movie.castList = castArray[index];
-    console.log("movie", movie);
+    movie.release_date = movie.release_date.substring(0,4);
     // setting completedCard to fully built card
     let completedCard = templates.buildMovieCard(movie);
     // printing into the dom appended to the cards from handlebars
     $container.append(completedCard);
   });
+  console.log("movie results for real", movieResults);
 }
 
-// helper func returns a promise used in promise.all
-module.exports.addMovie = (movieData) => {
-  console.log("movieData", movieData);
+// adds movie with id, user, and watched status to firebase
+module.exports.addMovie = (newMovieObj) => {
   return new Promise( (resolve, reject) => {
-    // setting var that sets the firebase auth to current user
-    let currentUser = firebase.auth().currentUser.uid;
-    // setting current user to each movie obj
-    movieData.uid = currentUser;
-    // call that posts users movies to fb
     $.ajax({
       url: `${fbURL}/movies.json`,
       type: "POST",
-      data: JSON.stringify(movieData),
+      data: JSON.stringify(newMovieObj),
       dataType: "json"
     }).done( (movieId) => {
       resolve(movieId);
     });
   });
 };
-
-// movie api id and user id check
-// saving when addd a movie below
-// movie id = need
-// user id = check
-// prop status : watched y/n rating: default = 0 under 9 blah 9+ fav

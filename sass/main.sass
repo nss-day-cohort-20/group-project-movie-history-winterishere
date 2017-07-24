@@ -1,8 +1,7 @@
 html, body
 	width: 100%
 	background-color: #222
-	color: #c1c1c1 
-
+	color: #c1c1c1
 
 #nav-container
 	border: 2px solid #191919
@@ -17,6 +16,9 @@ html, body
 
 a
 	color: #f6f6f6
+
+#search-bar:disabled
+	background-color: #cbcbcb
 
 a:hover
 	text-decoration: none
@@ -42,7 +44,6 @@ a:hover
 	border-radius: 4px
 	padding: 10px
 	border: 2px solid #191919
-	display: block
 	margin-bottom: 5px
 	box-shadow: 1px 1px 1px 1px #191919
 	background-color: #222
@@ -82,12 +83,16 @@ h1
 .card
 	background-color: #191919
 	box-shadow: 1px 1px 1px 1px #191919
+	margin-bottom: 20px
 
 .list-group-item
 	background-color: #f6f6f6
 	color: #191919
 
-.footer 
+div .hideIt 
+	display: none
+
+.footer
 	padding-top: 20px
 	border-top: 2px solid #191919
 	bottom: 0
@@ -97,3 +102,17 @@ h1
 
 .card-img-top
 	height: 325px
+
+.card-title
+	font-size: 1.2em
+
+.star
+	font-size: 1.5em
+	letter-spacing: -.35em
+	color: #cbcbcb
+	display: inline
+	cursor: pointer
+
+.rated
+	color: #ffd700
+	

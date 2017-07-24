@@ -1,4 +1,4 @@
-// the template builder requires the card.hbs
+// requires the card.hbs
 // exports buildMovieCard
 // templateBuilder is required in movieFactory.js
 
@@ -7,12 +7,13 @@
 let $ = require('jquery');
 let movieListTemplate = require('../templates/card.hbs');
 
-module.exports.makeMovieList = (movieList) => {
-	return movieListTemplate({movie: movieList});
-};
+//not currently in use - MB
+
+// module.exports.makeMovieList = (movieList) => {
+// 	return movieListTemplate({movie: movieList});
+// };
 
 module.exports.buildMovieCard = (movieObj) => {
-
   let movieData = movieObj;
   return movieListTemplate(movieData);
 };
