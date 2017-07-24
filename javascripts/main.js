@@ -3,13 +3,10 @@
 let $ = require("jquery");
 let controller = require("./controller");
 let userFactory = require("./userFactory");
+let db = require('./movieFactory');
 
-//Allows all elements with event listeners to be activated on load
-controller.newMovieSearch();
-controller.addToWatchList();
 
 //When the user clicks the log in link, this calls the function to log them in with firebase
-//It also loads the user's movies to the DOM
 $("#log-on").click( function() {
 	userFactory.logInGoogle()
 	.then( (result) => {
@@ -24,3 +21,16 @@ $("#log-out").click( function() {
 	userFactory.logOutGoogle();
 	location.reload();
 });
+
+$(document).on("click", ".card-link", function() {
+	let movieId = $(this).data("add-watch");
+	controller.addToWatchList(movieId);
+});
+
+$(document).keypress(function(e) {
+  var key = e.which;
+  if(key == 13) {
+    let searchValue = $("#search-bar").val();
+      db.getMovies(searchValue);
+  }
+ });
