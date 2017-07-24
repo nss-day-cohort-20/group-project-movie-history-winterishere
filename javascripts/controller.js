@@ -21,4 +21,3 @@ module.exports.addToWatchList = (movieId) => {
 		console.log("addToWatchList");
     });
 };
-
