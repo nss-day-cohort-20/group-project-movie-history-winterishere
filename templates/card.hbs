@@ -19,7 +19,19 @@
     </ul>
     {{!-- link to add to watchlist --}}
     <div class="card-block">
-      <a href="#" onclick="return false" class="card-link" data-add-watch="{{id}}">Add to Watchlist</a>
+      <a href="#" onclick="return false" id="{{id}}-add-watchlist" class="card-link" data-add-watch="{{id}}">Add to Watchlist</a>
+      <div id="{{id}}-stars-container" class="hideIt">
+        <p class="star" id="{{id}}-star-1">★</p>
+        <p class="star" id="{{id}}-star-2">★</p>
+        <p class="star" id="{{id}}-star-3">★</p>
+        <p class="star" id="{{id}}-star-4">★</p>
+        <p class="star" id="{{id}}-star-5">★</p>
+        <p class="star" id="{{id}}-star-6">★</p>
+        <p class="star" id="{{id}}-star-7">★</p>
+        <p class="star" id="{{id}}-star-8">★</p>
+        <p class="star" id="{{id}}-star-9">★</p>
+        <p class="star" id="{{id}}-star-10">★</p>
+      </div>
     </div>
   </div>
 </div>
