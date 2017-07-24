@@ -4,9 +4,7 @@ let $ = require('jquery');
 let dbGet = require("./dbGetter")();
 let $container = $('.container');
 let templates = require('./templateBuilder');
-let formTemplate = require('../templates/card.hbs');
 let fbURL = "https://moviewatcher-movie-history.firebaseio.com";
-let firebase = require('./fbConfig');
 
 // empty arr that we are pushing movieData results into
 let movieArr = [];
@@ -31,7 +29,7 @@ module.exports.getMovies = (search) => {
       .then((credits) => {
         getCast(movieData, credits);
       });
-      //call a new function that takes the arguments "movieDa// makes a call to the database for movie datata" and "credits", and have that function combine them
+      //call a new function that takes the arguments "moviedata" and "credits", and have that function combine them
       resolve(movieData);
     });
   });
@@ -54,7 +52,6 @@ function makeActorPromises() {
 // helper func returns a promise used in promise.all
 function getActors(actorURL) {
   //fetch actors from API, but wrap it in a promise
-  //This returns a promise
   return new Promise((resolve, reject) => {
     $.ajax({
         url: actorURL
@@ -82,8 +79,6 @@ function getCast(movieData, credits) {
 function buildCastArray(movieData, castArray) {
   // setting movieResults to movieData
   let movieResults = movieData.results;
-  // let allTheNewMovies = templates.makeMovieList(movieResults);
-  // $container.html(allTheNewMovies);
   movieResults.forEach(function(movie, index) {
     // cast array at each index matched the movie index
     movie.castList = castArray[index];
@@ -94,22 +89,11 @@ function buildCastArray(movieData, castArray) {
     $container.append(completedCard);
   });
   console.log("movie results for real", movieResults);
-
-
-
 }
 
-// helper func returns a promise used in promise.all
+// adds movie with id, user, and watched status to firebase
 module.exports.addMovie = (newMovieObj) => {
-  // console.log("movieData", movieData);
   return new Promise( (resolve, reject) => {
-    // setting var that sets the firebase auth to current user
-    // let currentUser = firebase.auth().currentUser.uid;
-    // console.log(currentUser);
-    // setting current user to each movie obj
-    // movieData.uid = currentUser;
-    // console.log("movieData", movieData);
-    // call that posts users movies to fb
     $.ajax({
       url: `${fbURL}/movies.json`,
       type: "POST",
@@ -120,9 +104,3 @@ module.exports.addMovie = (newMovieObj) => {
     });
   });
 };
-
-// movie api id and user id check
-// saving when addd a movie below
-// movie id = need
-// user id = check
-// prop status : watched y/n rating: default = 0 under 9 blah 9+ fav

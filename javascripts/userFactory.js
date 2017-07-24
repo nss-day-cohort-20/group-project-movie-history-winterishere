@@ -8,7 +8,6 @@ module.exports.logInGoogle = () => {
 	return firebase.auth().signInWithPopup(provider);
 };
 
-
 //The function that's being called to log users out
 module.exports.logOutGoogle = () => {
 	return firebase.auth().signOut().then(function() {
